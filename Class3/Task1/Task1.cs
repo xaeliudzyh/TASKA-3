@@ -83,10 +83,20 @@ namespace Task1
         }
 
 // Раздача карт: случайное перемешивание (shuffle) и деление колоды пополам
-        internal static Dictionary<Player, Hand> Deal(Deck deck) 
+        internal static Dictionary<Player, Hand> Deal(Deck deck)
         {
-            throw new NotImplementedException();
+            var shuffledDeck = deck;
+            for (int i = 0; i < DeckSize; i++)
+            {
+                int j = new Random().Next(i + 1);
+                var temp = shuffledDeck[i];
+                shuffledDeck[j] = shuffledDeck[i];
+                shuffledDeck[i] = temp;
+            }
+            return new Dictionary<Player, Deck> { {Player.PlFirst, shuffledDeck.GetRange(0, 18)},
+                {Player.PlSecond, shuffledDeck.GetRange(18, 36)}};
         }
+
 
 // Один раунд игры (в том числе спор при равных картах).
 // Возвращается победитель раунда и набор карт, выложенных на стол.
