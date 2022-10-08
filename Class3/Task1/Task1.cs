@@ -119,18 +119,20 @@ namespace Task1
                 rW = RoundWinner(p1, p2);
 
             } while (rW == null && (hands[Player.PlFirst].Count > 0 && hands[Player.PlSecond].Count > 0));
-            /*if (hands[Player.PlSecond].Count== 0 && hands[Player.PlFirst].Count== 0) 
+            /*
+            if (hands[Player.PlSecond].Count== 0 && hands[Player.PlFirst].Count== 0) 
                 return new Tuple<Player, Deck>(Player.Draw, table);
             else
             {
-                if (hands[Player.PlSecond].Count== 0)
-                    return new Tuple<Player, Deck>(Player.PlFirst, table);
-                else
-                {
-                    if (hands[Player.PlFirst].Count== 0)
-                                    return new Tuple<Player, Deck>(Player.PlSecond, table);
-                }
+                
             }*/
+            if (hands[Player.PlSecond].Count== 0 && hands[Player.PlFirst].Count> 0)
+                                return new Tuple<Player, Deck>(Player.PlFirst, table);
+            else 
+            { 
+                if (hands[Player.PlFirst].Count== 0 && hands[Player.PlSecond].Count> 0) 
+                    return new Tuple<Player, Deck>(Player.PlSecond, table);
+            }
             if(rW==null)
                 return new Tuple<Player, Deck>(Player.Draw, table);
             return new Tuple<Player, Deck>(rW!.Value, table);
@@ -140,34 +142,39 @@ namespace Task1
 // в процессе игры печатаются ходы
         internal static Player Game(Dictionary<Player, Hand> hands)
         {
-            while (hands[Player.PlFirst].Count>0 && hands[Player.PlFirst].Count>0 )
+            while (hands[Player.PlFirst].Count>0 && hands[Player.PlSecond].Count>0 )
             {
                 var round= Round(hands);
                 var winner = round.Item1;
                 var table = round.Item2;
-
+               
                 foreach (var card in table)
                 {
                     if (hands[Player.PlFirst].Contains(card))
                     {
                         hands[Player.PlFirst].Remove(card);
-                    }   
-                    if (hands[Player.PlSecond].Contains(card))
-                    {
-                        hands[Player.PlSecond].Remove(card);
-                    } 
+                    }
+                    else
+                        if (hands[Player.PlSecond].Contains(card))
+                        {
+                            hands[Player.PlSecond].Remove(card);
+                        } 
                 }
+                if(winner==Player.Draw) continue;
                 hands[winner].AddRange(table);
 
             }
 
-            if (hands[Player.PlFirst].Count == 0 && hands[Player.PlFirst].Count == 0)
-                return Player.Draw;
-            if (hands[Player.PlFirst].Count == 0)
-                return Player.PlSecond;
-            return Player.PlFirst;
-
-
+            /*if (hands[Player.PlFirst].Count == 0 && hands[Player.PlFirst].Count == 0)
+             //   return Player.Draw;
+           // else*/
+            {
+                if (hands[Player.PlSecond].Count == 0)
+                    return Player.PlFirst;
+                else
+                    return Player.PlSecond;
+            }
+            
         }
 
 

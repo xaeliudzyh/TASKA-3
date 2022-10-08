@@ -77,19 +77,91 @@ public class Tests
         That(gameWinnerrr, Is.EqualTo(new Tuple<Player, List<Card>>(Player.Draw, new List<Card> { jCard1, jCard2 })));
     }
 
-    [Test]
-    public void Game2CardsTest()
+    /*[Test]
+    public void Game2CardsTestDraw()
     {
-        var six = TODO<Card>();
-        var ace = TODO<Card>();
+        var jack1 = new Card(Suit.Spades,Rank.Jack);
+        var jack2 = new Card(Suit.Hearts,Rank.Jack);
+        var six1 = new Card(Suit.Spades,Rank.Six);
+        var six2 = new Card(Suit.Hearts,Rank.Six);
         Dictionary<Player, List<Card>> hands = new Dictionary<Player, List<Card>>
         {
-            { TODO<Player>(), new List<Card> {six} },
-            { TODO<Player>(), new List<Card> {ace} }
+            { Player.PlFirst, new List<Card> { jack1,six1 } },
+            { Player.PlSecond, new List<Card> { jack2,six2 } }
         };
         var gameWinner = Game(hands);
-        That(gameWinner, Is.EqualTo(TODO<Player>()));
+        That(gameWinner, Is.EqualTo(Player.Draw));
+    }*/
+    
+    [Test]
+    public void Game2CardsTestPl2()
+    {
+        var jack = new Card(Suit.Spades,Rank.Jack);
+        var ace = new Card(Suit.Hearts,Rank.Ace);
+        var six1 = new Card(Suit.Spades,Rank.Six);
+        var six2 = new Card(Suit.Hearts,Rank.Six);
+        Dictionary<Player, List<Card>> hands = new Dictionary<Player, List<Card>>
+        {
+            { Player.PlFirst, new List<Card> { six1,jack } },
+            { Player.PlSecond, new List<Card> { six2,ace } }
+        };
+        var gameWinner = Game(hands);
+        That(gameWinner, Is.EqualTo(Player.PlSecond));
     }
+    
+    [Test]
+    public void Game2CardsTestPl2_1()
+    {
+        var jack = new Card(Suit.Spades,Rank.Jack);
+        var ace = new Card(Suit.Hearts,Rank.Ace);
+        var six1 = new Card(Suit.Spades,Rank.Six);
+        var six2 = new Card(Suit.Hearts,Rank.Six);
+        Dictionary<Player, List<Card>> hands = new Dictionary<Player, List<Card>>
+        {
+            { Player.PlFirst, new List<Card> { jack,six1 } },
+            { Player.PlSecond, new List<Card> { ace,six2 } }
+        };
+        var gameWinner = Game(hands);
+        That(gameWinner, Is.EqualTo(Player.PlSecond));
+    }
+    
+    [Test]
+    public void Game2CardsTestPl1_1()
+    {
+        var jack = new Card(Suit.Spades,Rank.Jack);
+        var ace = new Card(Suit.Hearts,Rank.Ace);
+        var six1 = new Card(Suit.Spades,Rank.Six);
+        var six2 = new Card(Suit.Hearts,Rank.Six);
+        Dictionary<Player, List<Card>> hands = new Dictionary<Player, List<Card>>
+        {
+            { Player.PlSecond, new List<Card> { jack,six1 } },
+            { Player.PlFirst, new List<Card> { ace,six2 } }
+        };
+        var gameWinner = Game(hands);
+        That(gameWinner, Is.EqualTo(Player.PlFirst));
+    }
+    
+    [Test]
+    public void Game2CardsTestPl1_2()
+    {
+        var jack = new Card(Suit.Spades,Rank.Jack);
+        var ace = new Card(Suit.Hearts,Rank.Ace);
+        var six1 = new Card(Suit.Spades,Rank.Six);
+        var six2 = new Card(Suit.Hearts,Rank.Six);
+        var seven1 = new Card(Suit.Hearts, Rank.Seven);
+        var king2 = new Card(Suit.Spades, Rank.King);
+            ;
+        Dictionary<Player, List<Card>> hands = new Dictionary<Player, List<Card>>
+        {
+            { Player.PlSecond, new List<Card> { jack,king2,six1 } },
+            { Player.PlFirst, new List<Card> { ace,six2,seven1 } }
+        };
+        var gameWinner = Game(hands);
+        That(gameWinner, Is.EqualTo(Player.PlFirst));
+    }
+    
+    
+    
     
     private static T TODO<T>()
     {
