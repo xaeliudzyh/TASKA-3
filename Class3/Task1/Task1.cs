@@ -60,13 +60,26 @@ namespace Task1
         // Возвращается null, если значения карт совпадают
         internal static Player? RoundWinner(Card card1, Card card2)
         {
-            throw new NotImplementedException();
+            if (card1.Rrank == card2.Rrank)
+                return null;
+            if (card1.Rrank > card2.Rrank)
+                return Player.PlFirst;
+            return Player.PlSecond;
         }
         
 // Возвращает полную колоду (36 карт) в фиксированном порядке
-        internal static Deck FullDeck() 
+        internal static Deck FullDeck()
         {
-            throw new NotImplementedException();
+            var fullDeck = new Deck();
+            foreach (Suit suit in Enum.GetValues(typeof(Suit)))
+            {
+                foreach (Rank rank in Enum.GetValues(typeof(Rank)))
+                {
+                    fullDeck.Add(new Card(suit,rank));
+                }
+            }
+
+            return fullDeck;
         }
 
 // Раздача карт: случайное перемешивание (shuffle) и деление колоды пополам
