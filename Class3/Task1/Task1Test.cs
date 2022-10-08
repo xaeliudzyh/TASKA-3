@@ -32,16 +32,50 @@ public class Tests
     [Test]
     public void RoundTest()
     {
-        var six = new Card(Suit.Spades,Rank.Six);
-        var ace = new Card(Suit.Spades,Rank.Ace);
+
+        //test1
+        var six = new Card(Suit.Spades, Rank.Six);
+        var ace = new Card(Suit.Spades, Rank.Ace);
         Dictionary<Player, List<Card>> hands = new Dictionary<Player, List<Card>>
         {
-            { Player.PlFirst, new List<Card> {six} },
-            { Player.PlSecond, new List<Card> {ace} }
+            { Player.PlFirst, new List<Card> { six } },
+            { Player.PlSecond, new List<Card> { ace } }
         };
         var gameWinner = Round(hands);
         That(gameWinner, Is.EqualTo(new Tuple<Player, List<Card>>(Player.PlSecond, new List<Card> { six, ace })));
     }
+
+    [Test]
+    public void RoundTest2()
+    {
+        //test2
+        var eight = new Card(Suit.Spades, Rank.Eight);
+        var seven = new Card(Suit.Hearts, Rank.Seven);
+        Dictionary<Player, List<Card>> handss = new Dictionary<Player, List<Card>>
+        {
+            { Player.PlFirst, new List<Card> { eight } },
+            { Player.PlSecond, new List<Card> { seven } }
+        };
+        var gameWinnerr = Round(handss);
+        That(gameWinnerr, Is.EqualTo(new Tuple<Player, List<Card>>(Player.PlFirst, new List<Card> { eight, seven })));
+
+    }
+    
+    /*[Test]
+    public void RoundTest3()
+    {
+
+    //test3
+        var jCard1 = new Card(Suit.Spades,Rank.Jack);
+        var jCard2 = new Card(Suit.Hearts,Rank.Jack);
+        Dictionary<Player, List<Card>> handsss = new Dictionary<Player, List<Card>>
+        {
+            { Player.PlFirst, new List<Card> {jCard1} },
+            { Player.PlSecond, new List<Card> {jCard2} }
+        };
+        var gameWinnerrr = Round(handsss);
+        That(gameWinnerrr, Is.EqualTo(new Tuple<Player, List<Card>>(Player.Draw, new List<Card> { jCard1, jCard2 })));
+    }*/
 
     [Test]
     public void Game2CardsTest()

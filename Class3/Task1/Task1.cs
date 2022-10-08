@@ -119,13 +119,18 @@ namespace Task1
                 rW = RoundWinner(p1, p2);
 
             } while (rW == null && (hands[Player.PlFirst].Count > 0 && hands[Player.PlSecond].Count > 0));
-            if (hands[Player.PlFirst].Count== 0)
-                return new Tuple<Player, Deck>(Player.PlSecond, table);
+            /*if (hands[Player.PlSecond].Count== 0 && hands[Player.PlFirst].Count== 0) 
+                return new Tuple<Player, Deck>(Player.Draw, table);
             else
             {
                 if (hands[Player.PlSecond].Count== 0)
                     return new Tuple<Player, Deck>(Player.PlFirst, table);
-            }
+                else
+                {
+                    if (hands[Player.PlFirst].Count== 0)
+                                    return new Tuple<Player, Deck>(Player.PlSecond, table);
+                }
+            }*/
             return new Tuple<Player, Deck>(rW!.Value, table);
         }
 
