@@ -8,26 +8,42 @@ using Table = System.Collections.Generic.List<Card>;
 // Масть
 internal enum Suit
 {
+    Clubs,     //крести
+    Diamonds,  //буби
+    Hearts,     //черви
+    Spades      //пики
 }
 
 // Значение
-internal enum Rank
+internal enum Rank: uint
 {
+    Ace=14,
+    King=13,
+    Queen=12,
+    Jack=11,
+    Ten=10,
+    Nine=9,
+    Eight=8,
+    Seven=7,
+    Six=6
 }
 
 // Карта
-record Card;
+record Card(Suit Ssuit, Rank Rrank);
+
 
 // Тип для обозначения игрока (первый, второй)
 internal enum Player
 {
+    PlFirst=0,
+    PlSecond=1,
+    Draw=2
 }
 
 namespace Task1
 {
     public class Task1
     {
-
  /*
  * Реализуйте игру "Пьяница" (в простейшем варианте, на колоде в 36 карт)
  * https://ru.wikipedia.org/wiki/%D0%9F%D1%8C%D1%8F%D0%BD%D0%B8%D1%86%D0%B0_(%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%B8%D0%B3%D1%80%D0%B0)
