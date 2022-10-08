@@ -61,7 +61,7 @@ public class Tests
 
     }
     
-    /*[Test]
+    [Test]
     public void RoundTest3()
     {
 
@@ -75,7 +75,7 @@ public class Tests
         };
         var gameWinnerrr = Round(handsss);
         That(gameWinnerrr, Is.EqualTo(new Tuple<Player, List<Card>>(Player.Draw, new List<Card> { jCard1, jCard2 })));
-    }*/
+    }
 
     [Test]
     public void Game2CardsTest()

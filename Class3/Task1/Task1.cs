@@ -131,6 +131,8 @@ namespace Task1
                                     return new Tuple<Player, Deck>(Player.PlSecond, table);
                 }
             }*/
+            if(rW==null)
+                return new Tuple<Player, Deck>(Player.Draw, table);
             return new Tuple<Player, Deck>(rW!.Value, table);
         }
 
