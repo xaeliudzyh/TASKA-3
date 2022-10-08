@@ -32,7 +32,15 @@ public class Tests
     [Test]
     public void RoundTest()
     {
-        throw new NotImplementedException();
+        var six = new Card(Suit.Spades,Rank.Six);
+        var ace = new Card(Suit.Spades,Rank.Ace);
+        Dictionary<Player, List<Card>> hands = new Dictionary<Player, List<Card>>
+        {
+            { Player.PlFirst, new List<Card> {six} },
+            { Player.PlSecond, new List<Card> {ace} }
+        };
+        var gameWinner = Round(hands);
+        That(gameWinner, Is.EqualTo(new Tuple<Player, List<Card>>(Player.PlSecond, new List<Card> { six, ace })));
     }
 
     [Test]
