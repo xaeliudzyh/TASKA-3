@@ -186,4 +186,4 @@ namespace Task1
             Console.WriteLine($"Победитель: {winner}");
         }
     }
-}
+}//l
