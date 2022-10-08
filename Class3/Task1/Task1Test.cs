@@ -9,7 +9,16 @@ public class Tests
     [Test]
     public void RoundWinnerTest()
     {
-        throw new NotImplementedException();
+        That(RoundWinner( new Card(Suit.Clubs, Rank.Ace), new Card(Suit.Spades, Rank.Eight)),
+            Is.EqualTo(Player.PlFirst));
+        That(RoundWinner( new Card(Suit.Clubs, Rank.Ace), new Card(Suit.Clubs, Rank.King)),
+            Is.EqualTo(Player.PlFirst));
+        That(RoundWinner( new Card(Suit.Clubs, Rank.Six), new Card(Suit.Spades, Rank.Eight)),
+            Is.EqualTo(Player.PlSecond));
+        That(RoundWinner( new Card(Suit.Clubs, Rank.Ace), new Card(Suit.Spades, Rank.Ace)),
+            Is.EqualTo(null));
+
+
     }
 
     [Test]
@@ -17,7 +26,7 @@ public class Tests
     {
         var deck = FullDeck();
         That(deck, Has.Count.EqualTo(DeckSize));
-        throw new NotImplementedException();
+        
     }
 
     [Test]
