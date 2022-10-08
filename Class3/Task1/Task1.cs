@@ -100,15 +100,69 @@ namespace Task1
 
 // Один раунд игры (в том числе спор при равных картах).
 // Возвращается победитель раунда и набор карт, выложенных на стол.
-        internal static Tuple<Player, Table> Round(Dictionary<Player, Hand> hands) {
-            throw new NotImplementedException();
+        internal static Tuple<Player, Table> Round(Dictionary<Player, Hand> hands)
+        {
+            var table = new List<Card>();
+            Player? rW = null;
+            do
+            {
+                var p1 = hands[Player.PlFirst].First();
+                var p2 = hands[Player.PlSecond].First();
+                
+                hands[Player.PlFirst].RemoveAt(0);
+                hands[Player.PlSecond].RemoveAt(0);
+                
+                table.Add(p1);
+                table.Add(p2);
+                if(p1.Rrank==p2.Rrank)
+                    continue;
+                rW = RoundWinner(p1, p2);
+
+            } while (rW == null && (hands[Player.PlFirst].Count > 0 && hands[Player.PlSecond].Count > 0));
+            if (hands[Player.PlFirst].Count== 0)
+                return new Tuple<Player, Deck>(Player.PlSecond, table);
+            else
+            {
+                if (hands[Player.PlSecond].Count== 0)
+                    return new Tuple<Player, Deck>(Player.PlFirst, table);
+            }
+            return new Tuple<Player, Deck>(rW!.Value, table);
         }
 
 // Полный цикл игры (возвращается победивший игрок)
 // в процессе игры печатаются ходы
-        internal static Player Game(Dictionary<Player, Hand> hands) {
-            throw new NotImplementedException();
+        internal static Player Game(Dictionary<Player, Hand> hands)
+        {
+            while (hands[Player.PlFirst].Count>0 && hands[Player.PlFirst].Count>0 )
+            {
+                var round= Round(hands);
+                var winner = round.Item1;
+                var table = round.Item2;
+
+                foreach (var card in table)
+                {
+                    if (hands[Player.PlFirst].Contains(card))
+                    {
+                        hands[Player.PlFirst].Remove(card);
+                    }   
+                    if (hands[Player.PlSecond].Contains(card))
+                    {
+                        hands[Player.PlSecond].Remove(card);
+                    } 
+                }
+                hands[winner].AddRange(table);
+
+            }
+
+            if (hands[Player.PlFirst].Count == 0 && hands[Player.PlFirst].Count == 0)
+                return Player.Draw;
+            if (hands[Player.PlFirst].Count == 0)
+                return Player.PlSecond;
+            return Player.PlFirst;
+
+
         }
+
 
         public static void Main(string[] args)
         {
