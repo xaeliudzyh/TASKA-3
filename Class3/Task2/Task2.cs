@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 using OneVariableFunction = System.Func<double, double>;
 using FunctionName = System.String;
 
@@ -14,7 +15,7 @@ namespace Task2
 
 
 // Сформируйте набор как минимум из десяти вещественных функций одной переменной
-internal static Dictionary<FunctionName, OneVariableFunction> AvailableFunctions =
+        internal static Dictionary<FunctionName, OneVariableFunction> AvailableFunctions =
             new Dictionary<FunctionName, OneVariableFunction>
             {
                 { "square", x => x * x },
@@ -31,7 +32,7 @@ internal static Dictionary<FunctionName, OneVariableFunction> AvailableFunctions
             };
 
 // Тип данных для представления входных данных
-internal record InputData(double FromX, double ToX, int NumberOfPoints, List<string> FunctionNames);
+        internal record InputData(double FromX, double ToX, int NumberOfPoints, List<string> FunctionNames);
 
 // Чтение входных данных из параметров командной строки
         private static InputData? prepareData(string[] args)
@@ -51,17 +52,35 @@ internal record InputData(double FromX, double ToX, int NumberOfPoints, List<str
 // с заголовками столбцов и строками (первый столбец --- значение x,
 // остальные столбцы --- значения функций). Одно из полей --- количество знаков
 // после десятичной точки.
-internal record FunctionTable
-{
-    
+        internal record FunctionTable(InputData inData)
+        {
+            
             // Код, возвращающий строковое представление таблицы (с использованием StringBuilder)
             // Столбец x выравнивается по левому краю, все остальные столбцы по правому.
             // Для форматирования можно использовать функцию String.Format.
             public override string ToString()
             {
-                StringBuilder funcTable;
-                for(int i=0;i<prepareData().NumberOfPoints;i++)
-            }
+                StringBuilder funcTable=new StringBuilder();
+                funcTable.Append(String.Format("0,from"))
+                /*
+                for (double i = 0; i <= (inData.FromX - inData.ToX) * Math.Pow(10, inData.NumberOfPoints); i++)
+                {
+                    for (int j = 0; j <inData.FunctionNames.Count+2; j++)
+                    {
+                        string t ="",h=inData.FromX.ToString();
+                        for (int m = 0; m < 2 + inData.NumberOfPoints; m++ )
+                        {
+                            t += h[(int)i];
+                        }
+                        h = t.PadLeft(3 + inData.NumberOfPoints, ' ');
+                        for (int m = 0; m < inData.FunctionNames.Count; m++)
+                        {
+                            double p= AvailableFunctions(inData.FunctionNames[m],i);
+                        }
+
+                    }
+                }
+            }*/
         }
 
 /*
